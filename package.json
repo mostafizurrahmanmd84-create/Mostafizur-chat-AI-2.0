@@ -1,0 +1,15 @@
+{
+  "name": "ai-chatbot-2.0",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm --workspace frontend run dev",
+    "server": "npm --workspace backend run server",
+    "build": "npm --workspace frontend run build",
+    "lint": "npm --workspace frontend run lint"
+  }
+}
