@@ -33,3 +33,4 @@ A modern AI chat web application built with React, Vite, Tailwind CSS, and an Ex
 ## Project Structure
 - frontend/
 - backend/
+# AI-assistant
