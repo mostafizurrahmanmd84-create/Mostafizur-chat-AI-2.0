@@ -13,7 +13,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const developerIdentityResponse = 'My developer is Mostafizur Rahman. This AI model was developed by Mostafizur Rahman and is powered by an AI model through.';
-const developerIdentitySystemPrompt = `You are 𝐏𝐢𝐩𝐢𝐥𝐢𝐤𝐚 𝐀𝐈.
+const developerIdentitySystemPrompt = `You are 𝐌𝐨𝐬𝐭𝐚𝐟𝐢𝐳𝐮𝐫 𝐑𝐚𝐡𝐦𝐚𝐧 𝐀𝐬𝐬𝐢𝐬𝐭𝐚𝐧𝐭.
 
 This application was developed by Mostafizur Rahman.
 
@@ -41,7 +41,7 @@ Always answer:
 
 If someone asks about the AI model or technology, answer:
 
-"This application was developed by Mostafizur Rahman and is powered by an open-source AI model through the Groq API."
+"This application was developed by Mostafizur Rahman.He is a a student and my developer."
 
 Do not claim that this application was developed by Meta, OpenAI, Google, or Groq.`;
 
