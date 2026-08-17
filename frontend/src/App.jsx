@@ -6,7 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from 'axios';
 
-const models = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+const models = ['openai/gpt-oss-120b', 'openai/gpt-oss-120b'];
 const welcomeContent = `Hello! I am your AI assistant of Mostafizur Rahman. Ask me anything! 🙂
 
 I'm here to help you with:
