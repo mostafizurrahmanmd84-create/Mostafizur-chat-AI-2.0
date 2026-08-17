@@ -96,7 +96,7 @@ const getProviderConfig = (useProvider) => {
     return {
       endpoint: 'https://api.groq.com/openai/v1/chat/completions',
       name: 'Groq',
-      model: process.env.GROQ_MODEL || 'llama-3.1-8b-instant'
+      model: process.env.GROQ_MODEL || 'openai/gpt-oss-120b'
     };
   }
 
