@@ -148,6 +148,36 @@ const sendMessengerTextMessage = async (senderPsid, responseText) => {
   }
 };
 
+// Sends a sender_action to Facebook (e.g. "typing_on", "typing_off", "mark_seen").
+// Failures are logged but never thrown, so a typing-indicator hiccup never breaks the reply flow.
+const sendMessengerSenderAction = async (senderPsid, senderAction) => {
+  const pageAccessToken = process.env.PAGE_ACCESS_TOKEN;
+  if (!pageAccessToken) {
+    return;
+  }
+
+  const facebookUrl = `https://graph.facebook.com/v16.0/me/messages?access_token=${encodeURIComponent(pageAccessToken)}`;
+  const body = {
+    recipient: { id: senderPsid },
+    sender_action: senderAction
+  };
+
+  try {
+    const fbResponse = await fetch(facebookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    if (!fbResponse.ok) {
+      const errorBody = await fbResponse.text();
+      console.warn(`Facebook sender_action (${senderAction}) failed: ${fbResponse.status} ${errorBody}`);
+    }
+  } catch (error) {
+    console.warn(`Facebook sender_action (${senderAction}) request error:`, error);
+  }
+};
+
 const getAiReply = async ({ messages: incomingMessages, requestedModel }) => {
   const messages = Array.isArray(incomingMessages)
     ? incomingMessages
@@ -288,11 +318,17 @@ app.post('/webhook', async (req, res) => {
             continue;
           }
 
+          // Let the user see "Typing..." in Messenger while the AI reply is being generated.
+          await sendMessengerSenderAction(senderPsid, 'typing_on');
+
           const reply = await getAiReply({
             messages: [{ role: 'user', content: userText }]
           });
 
           await sendMessengerTextMessage(senderPsid, reply);
+
+          // Turn the typing indicator off now that the reply has been sent.
+          await sendMessengerSenderAction(senderPsid, 'typing_off');
         }
       }
     }
